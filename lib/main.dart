@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:green_mile/screens/login_screens/login_page.dart';
+import 'package:green_mile/screens/onboard_screen/onboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'The Green Mile Project',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: const Onboard(),
     );
   }
 }

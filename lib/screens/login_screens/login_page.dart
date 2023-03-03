@@ -27,17 +27,23 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: 300,
-              width: double.infinity,
-              child: Image.asset(
-                "assets/images/doc4.png",
-                height: 50,
-                fit: BoxFit.cover,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 150,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () {}, child: Text('Create An Account'))
+                    ],
+                  ),
+                  ButtonWidget(
+                    text: "Login With Google",
+                    image: "assets/images/goggle.png",
+                  )
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 15,
             ),
             Text(
               'Green Mile Project',
