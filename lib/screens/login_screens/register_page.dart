@@ -21,6 +21,12 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
+              const Text('Create An Account',
+                  style: TextStyle(color: Colors.black)),
+              Image.asset(
+                'assets/family.png',
+                height: 150,
+              ),
               Form(
                 child: SingleChildScrollView(
                   child: Column(
