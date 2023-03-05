@@ -9,6 +9,7 @@ class TextInputField extends StatelessWidget {
   });
   final String hintText;
   final String labelText;
+
   final Icon prefix;
 
   @override

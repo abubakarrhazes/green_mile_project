@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, must_be_immutable, prefer_const_constructors_in_immutables
 import 'package:flutter/material.dart';
 import 'package:green_mile/utils/validators.dart';
+import 'package:green_mile/widgets/optional_login.dart';
 
 import '../../widgets/button_widget.dart';
 
@@ -23,183 +24,151 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              height: 150,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      OutlinedButton(
-                          onPressed: () {}, child: Text('Create An Account'))
-                    ],
-                  ),
-                  ButtonWidget(
-                    text: "Login With Google",
-                    image: "assets/images/goggle.png",
-                  )
-                ],
-              ),
-            ),
-            Text(
-              'Green Mile Project',
-              style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              width: double.infinity,
-              //color: Colors.red,
-              child: Form(
-                key: _formkey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: emailController,
-                        validator: (value) =>
-                            Validators.validateEmail("${emailController}"),
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'Enter Your Email Here',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      TextFormField(
-                        controller: passwordController,
-                        validator: (value) => Validators.validatePassword(
-                            "${passwordController}"),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Enter Your Password Here',
-                          prefix: Icon(Icons.lock_outline),
-                          suffix: Icon(Icons.visibility),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                            onTap: () =>
-                                Navigator.pushNamed(context, '/forgot'),
-                            child: Text(
-                              'Forget Password ',
-                              style: TextStyle(
-                                color: Colors.redAccent,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ButtonWidget(
-                        text: 'Login',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Column(
               children: [
-                Expanded(
-                    child: Divider(
-                  color: Colors.redAccent,
-                )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.deepPurpleAccent),
+                          borderRadius: BorderRadius.circular(5)),
+                      child: Center(
+                        child: Text(
+                          'Create Account',
+                          style: TextStyle(
+                              color: Colors.deepPurpleAccent,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 SizedBox(
-                  width: 20,
+                  height: 20,
                 ),
                 Text(
-                  'Login Via',
+                  'Welcome Back !',
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 2),
                 ),
                 SizedBox(
-                  width: 20,
+                  height: 20,
                 ),
-                Expanded(
-                  child: Divider(
-                    color: Colors.redAccent,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () => {
-                    print('Hola'),
-                  },
-                  child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.asset('assets/images/logo.png')),
-                ),
+                OptionalLogin(
+                    image: "assets/images/goggle.png",
+                    text: "Login With Goggle"),
                 SizedBox(
-                  width: 20,
+                  height: 20,
                 ),
-                GestureDetector(
-                  onTap: () => {
-                    print('Hola'),
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                OptionalLogin(
+                    image: "assets/images/twitter.png",
+                    text: "Login With Goggle"),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Divider(
+                      color: Colors.deepPurpleAccent,
+                    )),
+                    SizedBox(
+                      width: 20,
                     ),
-                    child: Image.asset('assets/images/goggle.png'),
+                    Text(
+                      'Login Via',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.deepPurpleAccent,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Form(
+                  key: _formkey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: emailController,
+                          validator: (value) =>
+                              Validators.validateEmail("${emailController}"),
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'Enter Your Email Here',
+                            suffix: Icon(Icons.mail_outline),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: passwordController,
+                          validator: (value) => Validators.validatePassword(
+                              "${passwordController}"),
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'Enter Your Password Here',
+                            prefix: Icon(Icons.lock_outline),
+                            suffix: Icon(Icons.visibility),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ButtonWidget(
+                          text: 'Sign In',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    "Forgot Password ? Reset Here ",
+                    style: TextStyle(
+                        color: Colors.deepPurpleAccent,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Dont   Have An Account ? Create one ',
-              style: TextStyle(
-                  color: Colors.redAccent,
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal),
-            )
-          ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

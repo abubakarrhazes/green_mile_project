@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:green_mile/screens/onboard_screen/onboard.dart';
+import 'package:green_mile/screens/login_screens/register_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'The Green Mile Project',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
       ),
-      home: const Onboard(),
+      home: RegisterPage(),
     );
   }
 }
