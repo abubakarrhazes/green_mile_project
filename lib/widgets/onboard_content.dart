@@ -10,7 +10,10 @@ class OnboardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(image),
+        Image.network(
+          image,
+          height: 150,
+        ),
         const SizedBox(
           height: 10,
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_mile/screens/onboard_screen/onboard_controller.dart';
+import 'package:green_mile/widgets/button_widget.dart';
 import 'package:green_mile/widgets/onboard_content.dart';
 
 class Onboard extends StatefulWidget {
@@ -27,23 +28,32 @@ class _OnboardState extends State<Onboard> {
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 15,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ],
         ),
         body: PageView.builder(
+            scrollDirection: Axis.horizontal,
             itemCount: controller.screens.length,
             itemBuilder: (BuildContext context, index) {
-              return Column(children: [
-                OnboardContent(
-                    image: controller.screens[index].imageAsset,
-                    text: controller.screens[index].text,
-                    desc: controller.screens[index].desc),
-                const SizedBox(
-                  height: 10,
-                ),
-              ]);
+              return Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      OnboardContent(
+                          image: controller.screens[index].imageAsset,
+                          text: controller.screens[index].text,
+                          desc: controller.screens[index].desc),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ButtonWidget(text: 'Continue Here')
+                    ]),
+              );
             }),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:green_mile/screens/login_screens/register_page.dart';
+import 'package:green_mile/screens/onboard_screen/onboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: RegisterPage(),
+      home: Onboard(),
     );
   }
 }
