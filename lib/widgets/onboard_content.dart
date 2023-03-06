@@ -12,7 +12,7 @@ class OnboardContent extends StatelessWidget {
       children: [
         Image.network(
           image,
-          height: 150,
+          height: 200,
         ),
         const SizedBox(
           height: 10,
@@ -23,7 +23,7 @@ class OnboardContent extends StatelessWidget {
               color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
         Text(
           desc,

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:green_mile/screens/login_screens/forgot_password.dart';
+import 'package:green_mile/screens/login_screens/login_page.dart';
+import 'package:green_mile/screens/login_screens/register_page.dart';
 import 'package:green_mile/screens/onboard_screen/onboard.dart';
 
 void main() {
@@ -17,7 +20,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: Onboard(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Onboard(),
+        '/register': (context) => RegisterPage(),
+        '/login': (context) => LoginPage(),
+        '/forgot': (context) => const ForgotPassword(),
+      },
     );
   }
 }

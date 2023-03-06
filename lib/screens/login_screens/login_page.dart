@@ -10,12 +10,11 @@ class LoginPage extends StatefulWidget {
 
   @override
   State<LoginPage> createState() => _LoginPageState();
-
-  final bool showPassword = false;
 }
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  bool showPassword = false;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -32,20 +31,25 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      height: 40,
-                      width: 150,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurpleAccent),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Center(
-                        child: Text(
-                          'Create Account',
-                          style: TextStyle(
-                              color: Colors.deepPurpleAccent,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 150,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.deepPurpleAccent),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Center(
+                          child: Text(
+                            'Create Account',
+                            style: TextStyle(
+                                color: Colors.deepPurpleAccent,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
@@ -66,14 +70,22 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 OptionalLogin(
-                    image: "assets/images/goggle.png",
+                    loginAction: () {
+                      //Code Here
+                    },
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/2702/2702602.png",
                     text: "Login With Goggle"),
                 SizedBox(
                   height: 20,
                 ),
                 OptionalLogin(
-                    image: "assets/images/twitter.png",
-                    text: "Login With Goggle"),
+                    loginAction: () {
+                      //Code Here
+                    },
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/733/733579.png",
+                    text: "Login With Twitter"),
                 SizedBox(
                   height: 20,
                 ),
@@ -129,12 +141,24 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
                           controller: passwordController,
                           validator: (value) => Validators.validatePassword(
-                              "${passwordController}"),
+                              "$passwordController"),
                           decoration: InputDecoration(
                             labelText: 'Password',
                             hintText: 'Enter Your Password Here',
                             prefix: Icon(Icons.lock_outline),
-                            suffix: Icon(Icons.visibility),
+                            suffix: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  showPassword = !showPassword;
+                                });
+                              },
+                              child: Icon(
+                                showPassword == false
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                size: 25,
+                              ),
+                            ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide: const BorderSide(
@@ -145,6 +169,11 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20,
                         ),
                         ButtonWidget(
+                          route: () {
+                            if (_formkey.currentState!.validate()) {
+                              Navigator.pushNamed(context, '/home');
+                            }
+                          },
                           text: 'Sign In',
                         ),
                       ],
@@ -155,12 +184,14 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/forgot');
+                  },
                   child: Text(
                     "Forgot Password ? Reset Here ",
                     style: TextStyle(
                         color: Colors.deepPurpleAccent,
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

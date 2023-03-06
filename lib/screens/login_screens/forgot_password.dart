@@ -17,14 +17,32 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.redAccent,
-          elevation: 0,
-        ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.deepPurpleAccent,
+                      size: 35,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Image.network(
+                'https://cdn-icons-png.flaticon.com/512/5618/5618714.png',
+                height: 150,
+              ),
+              SizedBox(
+                height: 30,
+              ),
               Text(
                 "Enter Email Address Used For Registration A Link Will be Sent To This Email",
                 textAlign: TextAlign.center,
@@ -35,7 +53,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
               Form(
                 child: Column(
@@ -49,6 +67,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: 20,
                     ),
                     ButtonWidget(
+                      route: () {},
                       text: 'Request Link',
                     ),
                   ],

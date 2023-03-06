@@ -22,11 +22,11 @@ class _OnboardState extends State<Onboard> {
           elevation: 0,
           actions: [
             TextButton(
-              onPressed: () => print('Hola'),
+              onPressed: () => Navigator.pushNamed(context, '/login'),
               child: const Text(
                 'Skip',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.deepPurpleAccent,
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
               ),
@@ -34,27 +34,47 @@ class _OnboardState extends State<Onboard> {
           ],
         ),
         body: PageView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: controller.screens.length,
-            itemBuilder: (BuildContext context, index) {
-              return Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      OnboardContent(
-                          image: controller.screens[index].imageAsset,
-                          text: controller.screens[index].text,
-                          desc: controller.screens[index].desc),
-                      const SizedBox(
-                        height: 20,
+          itemCount: controller.screens.length,
+          itemBuilder: (BuildContext context, index) {
+            return Container(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  OnboardContent(
+                      image: controller.screens[index].imageAsset,
+                      text: controller.screens[index].text,
+                      desc: controller.screens[index].desc),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      controller.screens.length,
+                      (index) => Container(
+                        margin: const EdgeInsets.all(5),
+                        height: 10,
+                        width: 10,
+                        decoration: const BoxDecoration(
+                          color: Colors.deepPurpleAccent,
+                          shape: BoxShape.circle,
+                        ),
                       ),
-                      ButtonWidget(text: 'Continue Here')
-                    ]),
-              );
-            }),
+                    ),
+                  ),
+                  ButtonWidget(
+                    text: 'Continue Here',
+                    route: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
