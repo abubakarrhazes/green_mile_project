@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const Text('Create An Account',
                   style: TextStyle(color: Colors.black)),
               Image.asset(
-                'assets/family.png',
+                'assets/scale.png',
                 height: 150,
               ),
               Form(
