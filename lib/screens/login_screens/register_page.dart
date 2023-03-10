@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           labelText: 'Name',
                           hintText: 'Enter Your Name Here',
-                          suffix: const Icon(Icons.person_2_outlined),
+                          suffix: const Icon(Icons.person_outlined),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
