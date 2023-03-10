@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20,
                         ),
                         ButtonWidget(
-                          route: () {
+                          onPress: () {
                             if (_formkey.currentState!.validate()) {
                               Navigator.pushNamed(context, '/home');
                             }

@@ -67,7 +67,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: 20,
                     ),
                     ButtonWidget(
-                      route: () {},
+                      onPress: () {},
                       text: 'Request Link',
                     ),
                   ],
