@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/network_controller.dart';
 
 import '../../utils/validators.dart';
 import '../../widgets/button_widget.dart';
+import '../../widgets/wait_dialog.dart';
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -10,7 +15,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final formResult = {};
+  final Map<String, String?> formResult = {};
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final controller = NetworkController();
   // final TextEditingController emailController = TextEditingController();
@@ -132,6 +137,34 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print(formResult);
+
+      bool waiting = true;
+      showWaitDialog(context).then((value) => waiting = true);
+      String? errorMessage = await AuthProvider.registerUser(
+          formResult['name']!, formResult['email']!, formResult['password']!);
+
+      if (errorMessage == null) {
+        log('Registration successful');
+
+        if (!mounted) return;
+        // Dismiss waiting dialog
+        if (waiting) Navigator.of(context).pop();
+        Navigator.pushNamed(context, '/login');
+      } else {
+        if (!mounted) return;
+        if (waiting) Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: Text(errorMessage),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Okay'))
+            ],
+          ),
+        );
+      }
     }
   }
 }
