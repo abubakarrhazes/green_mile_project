@@ -66,7 +66,7 @@ class _OnboardState extends State<Onboard> {
                   ),
                   ButtonWidget(
                     text: 'Continue Here',
-                    route: () {
+                    onPress: () {
                       Navigator.pushNamed(context, '/register');
                     },
                   ),

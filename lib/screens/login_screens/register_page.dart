@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/network_controller.dart';
 
 import '../../utils/validators.dart';
 import '../../widgets/button_widget.dart';
+import '../../widgets/wait_dialog.dart';
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -10,9 +15,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final Map<String, String?> formResult = {};
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final controller = NetworkController();
-  final TextEditingController emailController = TextEditingController();
+  // final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -34,18 +40,18 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 20,
               ),
-              Form(
-                child: SingleChildScrollView(
+              SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
                   child: Column(
                     children: [
                       TextFormField(
-                        controller: emailController,
-                        validator: (value) =>
-                            Validators.validateEmail("$emailController"),
+                        validator: (value) => Validators.validateName(value),
+                        onSaved: (newValue) => formResult['name'] = newValue,
                         decoration: InputDecoration(
                           labelText: 'Name',
                           hintText: 'Enter Your Name Here',
-                          suffix: const Icon(Icons.person_2_outlined),
+                          suffix: const Icon(Icons.person_outline),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
@@ -54,9 +60,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
-                        controller: passwordController,
-                        validator: (value) =>
-                            Validators.validatePassword("$passwordController"),
+                        validator: (value) => Validators.validateEmail(value),
+                        onSaved: (newValue) => formResult['email'] = newValue,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           hintText: 'Enter Your Email',
@@ -71,9 +76,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 20,
                       ),
                       TextFormField(
+                        obscureText: true,
+                        autocorrect: false,
+                        enableSuggestions: false,
                         controller: passwordController,
                         validator: (value) =>
-                            Validators.validatePassword("$passwordController"),
+                            Validators.validatePassword(value),
+                        onSaved: (newValue) =>
+                            formResult['password'] = newValue,
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter Your Password Here',
@@ -89,9 +99,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 20,
                       ),
                       TextFormField(
-                        controller: passwordController,
-                        validator: (value) =>
-                            Validators.validatePassword("$passwordController"),
+                        obscureText: true,
+                        autocorrect: false,
+                        enableSuggestions: false,
+                        validator: (value) => Validators.validatePassword(
+                            value, passwordController.text),
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Confirm  Password Here',
@@ -107,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 25,
                       ),
                       ButtonWidget(
-                        route: () {},
+                        onPress: _submitForm,
                         text: 'Create Account',
                       ),
                     ],
@@ -119,5 +131,40 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+
+  void _submitForm() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      print(formResult);
+
+      bool waiting = true;
+      showWaitDialog(context).then((value) => waiting = true);
+      String? errorMessage = await AuthProvider.registerUser(
+          formResult['name']!, formResult['email']!, formResult['password']!);
+
+      if (errorMessage == null) {
+        log('Registration successful');
+
+        if (!mounted) return;
+        // Dismiss waiting dialog
+        if (waiting) Navigator.of(context).pop();
+        Navigator.pushNamed(context, '/login');
+      } else {
+        if (!mounted) return;
+        if (waiting) Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: Text(errorMessage),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Okay'))
+            ],
+          ),
+        );
+      }
+    }
   }
 }

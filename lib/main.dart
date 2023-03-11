@@ -1,10 +1,28 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:green_mile/screens/login_screens/forgot_password_sent.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:green_mile/screens/login_screens/forgot_password.dart';
 import 'package:green_mile/screens/login_screens/login_page.dart';
 import 'package:green_mile/screens/login_screens/register_page.dart';
 import 'package:green_mile/screens/onboard_screen/onboard.dart';
 
-void main() {
+bool shouldUseFirebaseEmulator = false;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  if (shouldUseFirebaseEmulator) {
+    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  }
+
   runApp(const MyApp());
 }
 
@@ -26,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterPage(),
         '/login': (context) => LoginPage(),
         '/forgot': (context) => const ForgotPassword(),
+        '/forgotSent': (context) => const ForgotPasswordSent(),
       },
     );
   }

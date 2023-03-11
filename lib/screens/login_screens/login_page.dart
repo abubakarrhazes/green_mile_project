@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, must_be_immutable, prefer_const_constructors_in_immutables
 import 'package:flutter/material.dart';
+import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/validators.dart';
 import 'package:green_mile/widgets/optional_login.dart';
+import 'package:green_mile/widgets/wait_dialog.dart';
 
 import '../../widgets/button_widget.dart';
 
@@ -13,11 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool showPassword = false;
-
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final formResult = <String, String?>{};
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 OptionalLogin(
-                    loginAction: () {
-                      //Code Here
-                    },
+                    onPress: () => AuthProvider.loginWithGoogle,
                     image:
                         "https://cdn-icons-png.flaticon.com/512/2702/2702602.png",
                     text: "Login With Goggle"),
@@ -80,9 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 OptionalLogin(
-                    loginAction: () {
-                      //Code Here
-                    },
+                    onPress: () => loginWith(AuthProvider.loginWithTwitter),
                     image:
                         "https://cdn-icons-png.flaticon.com/512/733/733579.png",
                     text: "Login With Twitter"),
@@ -118,15 +114,14 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Form(
-                  key: _formkey,
-                  child: SingleChildScrollView(
+                SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
                     child: Column(
                       children: [
                         TextFormField(
-                          controller: emailController,
-                          validator: (value) =>
-                              Validators.validateEmail("${emailController}"),
+                          validator: (value) => Validators.validateEmail(value),
+                          onSaved: (newValue) => formResult['email'] = newValue,
                           decoration: InputDecoration(
                             labelText: 'Email',
                             hintText: 'Enter Your Email Here',
@@ -139,9 +134,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(height: 20),
                         TextFormField(
-                          controller: passwordController,
-                          validator: (value) => Validators.validatePassword(
-                              "$passwordController"),
+                          validator: (value) =>
+                              Validators.validatePassword(value),
+                          onSaved: (newValue) =>
+                              formResult['password'] = newValue,
                           decoration: InputDecoration(
                             labelText: 'Password',
                             hintText: 'Enter Your Password Here',
@@ -169,11 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20,
                         ),
                         ButtonWidget(
-                          route: () {
-                            if (_formkey.currentState!.validate()) {
-                              Navigator.pushNamed(context, '/home');
-                            }
-                          },
+                          onPress: _submitForm,
                           text: 'Sign In',
                         ),
                       ],
@@ -201,5 +193,42 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  loginWith(Future<String?> Function()? method, {bool withForm = false}) async {
+    bool waiting = true;
+    showWaitDialog(context).then((value) => waiting = false);
+    String? errorMessage;
+    if (withForm) {
+      errorMessage = await AuthProvider.loginUser(
+          formResult['email']!, formResult['password']!);
+    } else {
+      errorMessage = await method!();
+    }
+    if (!mounted) return;
+    // Dismiss waiting dialog
+    if (waiting) Navigator.pop(context);
+    if (errorMessage == null) {
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(errorMessage!),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Okay'))
+          ],
+        ),
+      );
+    }
+  }
+
+  _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      loginWith(null, withForm: true);
+    }
   }
 }

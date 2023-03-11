@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class OptionalLogin extends StatelessWidget {
   const OptionalLogin(
-      {required this.image, required this.text, required this.loginAction});
+      {required this.image, required this.text, required this.onPress});
 
   final String image, text;
-  final Function() loginAction;
+  final Function() onPress;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: loginAction,
+      onTap: onPress,
       child: Container(
         height: 45,
         width: 450,

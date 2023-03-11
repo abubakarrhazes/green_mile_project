@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
-  final Function() route;
-  ButtonWidget({required this.text, required this.route});
+  final Function() onPress;
+  ButtonWidget({required this.text, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: route,
+      onTap: onPress,
       child: Container(
         height: 50,
         width: double.infinity,
