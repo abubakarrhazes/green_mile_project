@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ForgotPasswordSent extends StatelessWidget {
   const ForgotPasswordSent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Icon(Icons.email_outlined, color: Colors.grey, size: 64),
           Padding(
             padding: EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 8),

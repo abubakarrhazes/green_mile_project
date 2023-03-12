@@ -7,7 +7,6 @@ import 'package:green_mile/utils/network_controller.dart';
 import '../../utils/validators.dart';
 import '../../widgets/button_widget.dart';
 import '../../widgets/wait_dialog.dart';
-import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -23,110 +22,112 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Create An Account',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-              Image.network(
-                  'https://cdn-icons-png.flaticon.com/512/7458/7458316.png',
-                  height: 150),
-              const SizedBox(
-                height: 20,
-              ),
-              SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        validator: (value) => Validators.validateName(value),
-                        onSaved: (newValue) => formResult['name'] = newValue,
-                        decoration: InputDecoration(
-                          labelText: 'Name',
-                          hintText: 'Enter Your Name Here',
-                          suffix: const Icon(Icons.person_outline),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                        validator: (value) => Validators.validateEmail(value),
-                        onSaved: (newValue) => formResult['email'] = newValue,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'Enter Your Email',
-                          suffix: const Icon(Icons.mail_outline),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        controller: passwordController,
-                        validator: (value) =>
-                            Validators.validatePassword(value),
-                        onSaved: (newValue) =>
-                            formResult['password'] = newValue,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Enter Your Password Here',
-                          prefix: Icon(Icons.lock_outline),
-                          suffix: Icon(Icons.visibility),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        autocorrect: false,
-                        enableSuggestions: false,
-                        validator: (value) => Validators.validatePassword(
-                            value, passwordController.text),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Confirm  Password Here',
-                          prefix: const Icon(Icons.lock_outline),
-                          suffix: const Icon(Icons.visibility),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      ButtonWidget(
-                        onPress: _submitForm,
-                        text: 'Create Account',
-                      ),
-                    ],
-                  ),
+      child: SingleChildScrollView(
+        child: Scaffold(
+          body: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Create An Account',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                Image.network(
+                    'https://cdn-icons-png.flaticon.com/512/7458/7458316.png',
+                    height: 150),
+                const SizedBox(
+                  height: 20,
                 ),
-              )
-            ],
+                SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          validator: (value) => Validators.validateName(value),
+                          onSaved: (newValue) => formResult['name'] = newValue,
+                          decoration: InputDecoration(
+                            labelText: 'Name',
+                            hintText: 'Enter Your Name Here',
+                            suffix: const Icon(Icons.person_outline),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          validator: (value) => Validators.validateEmail(value),
+                          onSaved: (newValue) => formResult['email'] = newValue,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'Enter Your Email',
+                            suffix: const Icon(Icons.mail_outline),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          controller: passwordController,
+                          validator: (value) =>
+                              Validators.validatePassword(value),
+                          onSaved: (newValue) =>
+                              formResult['password'] = newValue,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'Enter Your Password Here',
+                            prefix: Icon(Icons.lock_outline),
+                            suffix: Icon(Icons.visibility),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          autocorrect: false,
+                          enableSuggestions: false,
+                          validator: (value) => Validators.validatePassword(
+                              value, passwordController.text),
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            hintText: 'Confirm  Password Here',
+                            prefix: const Icon(Icons.lock_outline),
+                            suffix: const Icon(Icons.visibility),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                    color: Colors.transparent)),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        ButtonWidget(
+                          onPress: _submitForm,
+                          text: 'Create Account',
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

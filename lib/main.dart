@@ -1,19 +1,25 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:green_mile/screens/login_screens/forgot_password_sent.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:green_mile/screens/login_screens/forgot_password.dart';
+import 'package:green_mile/screens/login_screens/forgot_password_sent.dart';
 import 'package:green_mile/screens/login_screens/login_page.dart';
 import 'package:green_mile/screens/login_screens/register_page.dart';
 import 'package:green_mile/screens/onboard_screen/onboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'firebase_options.dart';
 
 bool shouldUseFirebaseEmulator = false;
+int? isViewed;
 
-void main() async {
+Future<void> main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  isViewed = prefs.getInt('onboard');
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -38,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      initialRoute: '/',
+      initialRoute: isViewed != 0 ? '/' : '/login',
       routes: {
         '/': (context) => const Onboard(),
         '/register': (context) => RegisterPage(),

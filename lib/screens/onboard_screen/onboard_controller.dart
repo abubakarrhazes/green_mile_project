@@ -8,5 +8,9 @@ class OnboardController {
         'https://cdn-icons-png.flaticon.com/512/7458/7458316.png',
         'The Green Mile',
         'Get Access To Full Law Counselling and Also Book Appointment With Our  Certified and Verified Lawyers '),
+    OnboardModel(
+        'https://cdn-icons-png.flaticon.com/512/7458/7458316.png',
+        'The Green Mile',
+        'Get Access To Full Law Counselling and Also Book Appointment With Our  Certified and Verified Lawyers ')
   ];
 }
