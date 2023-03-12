@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 OptionalLogin(
-                    onPress: () => AuthProvider.loginWithGoogle,
+                    onPress: () => loginWith(AuthProvider.loginWithGoogle),
                     image:
                         "https://cdn-icons-png.flaticon.com/512/2702/2702602.png",
                     text: "Login With Goggle"),
