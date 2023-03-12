@@ -11,9 +11,11 @@ import 'package:green_mile/screens/onboard_screen/onboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
+import 'screens/home_page.dart';
 
 bool shouldUseFirebaseEmulator = false;
 int? isViewed;
+bool alwaysStartAfresh = true;
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -25,6 +27,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if (alwaysStartAfresh) {
+    FirebaseAuth.instance.setPersistence(Persistence.NONE);
+  }
 
   if (shouldUseFirebaseEmulator) {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
@@ -45,14 +51,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      initialRoute: isViewed != 0 ? '/' : '/login',
+      initialRoute: alwaysStartAfresh
+          ? '/'
+          : isViewed != 0
+              ? '/'
+              : '/login',
       routes: {
         '/': (context) => const Onboard(),
         '/register': (context) => RegisterPage(),
-        '/login': (context) => LoginPage(),
+        '/login': (context) => const LoginPage(),
         '/forgot': (context) => const ForgotPassword(),
         '/forgotSent': (context) => const ForgotPasswordSent(),
-        '/home': (context) => HomePage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }

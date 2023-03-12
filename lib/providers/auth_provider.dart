@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:twitter_login/twitter_login.dart';
 
 class AuthProvider {
   static final _auth = FirebaseAuth.instance;
@@ -68,30 +70,54 @@ class AuthProvider {
 
   static Future<String?> loginWithGoogle() async {
     String? errorMessage;
-    await _auth
-        .signInWithProvider(GoogleAuthProvider())
-        .then((UserCredential userCredential) => null)
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    await FirebaseAuth.instance
+        .signInWithCredential(credential)
+        .then((value) => null)
         .onError<FirebaseAuthException>((error, stackTrace) {
-      if (error.code == "user-disabled") {
-        errorMessage = 'Account disabled';
-      } else {
-        errorMessage = 'Service error';
-      }
+      errorMessage = error.message;
     });
     return errorMessage;
   }
 
   static Future<String?> loginWithTwitter() async {
+    return "Service not yet supported";
     String? errorMessage;
-    await _auth
-        .signInWithProvider(TwitterAuthProvider())
-        .then((UserCredential userCredential) => null)
+    // Create a TwitterLogin instance
+    final twitterLogin = TwitterLogin(
+        apiKey: '<your consumer key>',
+        apiSecretKey: ' <your consumer secret>',
+        redirectURI:
+            'https://green-mile-24fb2.firebaseapp.com/__/auth/handler');
+
+    // Trigger the sign-in flow
+    final authResult = await twitterLogin.login();
+
+    // Create a credential from the access token
+    final twitterAuthCredential = TwitterAuthProvider.credential(
+      accessToken: authResult.authToken!,
+      secret: authResult.authTokenSecret!,
+    );
+
+    // Once signed in, return the UserCredential
+    await FirebaseAuth.instance
+        .signInWithCredential(twitterAuthCredential)
+        .then((value) => null)
         .onError<FirebaseAuthException>((error, stackTrace) {
-      if (error.code == "user-disabled") {
-        errorMessage = 'Account disabled';
-      } else {
-        errorMessage = 'Service error';
-      }
+      errorMessage = error.message;
     });
     return errorMessage;
   }

@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, must_be_immutable, prefer_const_constructors_in_immutables
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:green_mile/providers/auth_provider.dart';
@@ -9,14 +8,14 @@ import 'package:green_mile/widgets/wait_dialog.dart';
 import '../../widgets/button_widget.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool showPassword = false;
   final formResult = <String, String?>{};
 
@@ -26,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
               children: [
                 Row(
@@ -44,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.deepPurpleAccent,
                                 style: BorderStyle.solid),
                             borderRadius: BorderRadius.circular(5)),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Create Account',
                             style: TextStyle(
@@ -58,38 +57,38 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text(
                   'Welcome Back !',
                   style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                         color: Colors.black,
                         fontSize: 25,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 2),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 OptionalLogin(
-                    onPress: () => AuthProvider.loginWithGoogle(),
+                    onPress: () => loginWith(AuthProvider.loginWithGoogle),
                     image: 'assets/images/google.png',
                     text: "Login With Goggle"),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 OptionalLogin(
                     onPress: () => loginWith(AuthProvider.loginWithTwitter),
                     image: 'assets/images/twitter.png',
                     text: "Login With Twitter"),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
-                  children: [
+                  children: const [
                     Expanded(
                         child: Divider(
                       color: Colors.deepPurpleAccent,
@@ -116,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 SingleChildScrollView(
@@ -130,14 +129,14 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             hintText: 'Enter Your Email Here',
-                            suffix: Icon(Icons.mail_outline),
+                            suffix: const Icon(Icons.mail_outline),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide: const BorderSide(
                                     color: Colors.transparent)),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextFormField(
                           validator: (value) =>
                               Validators.validatePassword(value),
@@ -146,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             labelText: 'Password',
                             hintText: 'Enter Your Password Here',
-                            prefix: Icon(Icons.lock_outline),
+                            prefix: const Icon(Icons.lock_outline),
                             suffix: GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -166,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                     color: Colors.transparent)),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         ButtonWidget(
@@ -177,14 +176,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 40,
                 ),
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/forgot');
                   },
-                  child: Text(
+                  child: const Text(
                     "Forgot Password ? Reset Here ",
                     style: TextStyle(
                         color: Colors.deepPurpleAccent,

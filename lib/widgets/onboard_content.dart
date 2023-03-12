@@ -9,13 +9,14 @@ class OnboardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
           image,
           height: 200,
         ),
         const SizedBox(
-          height: 10,
+          height: 42,
         ),
         Text(
           text,
