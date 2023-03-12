@@ -13,6 +13,7 @@ import 'firebase_options.dart';
 
 bool shouldUseFirebaseEmulator = false;
 int? isViewed;
+bool onDevMode = true;
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -44,7 +45,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      initialRoute: isViewed != 0 ? '/' : '/login',
+      initialRoute: onDevMode
+          ? '/'
+          : isViewed != 0
+              ? '/'
+              : '/login',
       routes: {
         '/': (context) => const Onboard(),
         '/register': (context) => RegisterPage(),
