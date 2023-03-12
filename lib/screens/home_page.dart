@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
-        body: Text('Home Page'),
+        body: Center(child: Text('Home Page')),
       ),
     );
   }

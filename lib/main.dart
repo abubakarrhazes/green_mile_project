@@ -10,6 +10,7 @@ import 'package:green_mile/screens/onboard_screen/onboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
+import 'screens/home_page.dart';
 
 bool shouldUseFirebaseEmulator = false;
 int? isViewed;
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
               : '/login',
       routes: {
         '/': (context) => const Onboard(),
+        '/home': (context) => const HomePage(),
         '/register': (context) => RegisterPage(),
         '/login': (context) => LoginPage(),
         '/forgot': (context) => const ForgotPassword(),
