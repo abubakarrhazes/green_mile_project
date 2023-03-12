@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_field, prefer_final_fields, must_be_immutable, prefer_const_constructors_in_immutables
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/validators.dart';
 import 'package:green_mile/widgets/optional_login.dart';
@@ -39,7 +40,9 @@ class _LoginPageState extends State<LoginPage> {
                         height: 40,
                         width: 150,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurpleAccent),
+                            border: Border.all(
+                                color: Colors.deepPurpleAccent,
+                                style: BorderStyle.solid),
                             borderRadius: BorderRadius.circular(5)),
                         child: Center(
                           child: Text(
@@ -60,27 +63,27 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Text(
                   'Welcome Back !',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 2),
+                  style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 2),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 OptionalLogin(
-                    onPress: () => AuthProvider.loginWithGoogle,
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/2702/2702602.png",
+                    onPress: () => AuthProvider.loginWithGoogle(),
+                    image: 'assets/images/google.png',
                     text: "Login With Goggle"),
                 SizedBox(
                   height: 20,
                 ),
                 OptionalLogin(
                     onPress: () => loginWith(AuthProvider.loginWithTwitter),
-                    image:
-                        "https://cdn-icons-png.flaticon.com/512/733/733579.png",
+                    image: 'assets/images/twitter.png',
                     text: "Login With Twitter"),
                 SizedBox(
                   height: 20,
@@ -90,6 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                         child: Divider(
                       color: Colors.deepPurpleAccent,
+                      thickness: 2,
                     )),
                     SizedBox(
                       width: 20,
@@ -107,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                       child: Divider(
                         color: Colors.deepPurpleAccent,
+                        thickness: 2,
                       ),
                     ),
                   ],

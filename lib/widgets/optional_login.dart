@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OptionalLogin extends StatelessWidget {
   const OptionalLogin(
@@ -22,7 +23,7 @@ class OptionalLogin extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(
+            Image.asset(
               image,
               height: 30,
             ),
@@ -31,10 +32,13 @@ class OptionalLogin extends StatelessWidget {
             ),
             Text(
               text,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.poppins(
+                textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 2),
+              ),
             )
           ],
         ),

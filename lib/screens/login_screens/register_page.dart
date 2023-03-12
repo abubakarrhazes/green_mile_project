@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/network_controller.dart';
+import 'package:green_mile/widgets/feedback.dart';
 
 import '../../utils/validators.dart';
 import '../../widgets/button_widget.dart';
@@ -22,23 +24,25 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Scaffold(
-          body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Create An Account',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-                Image.network(
-                    'https://cdn-icons-png.flaticon.com/512/7458/7458316.png',
-                    height: 150),
+                Text(
+                  'Create Account',
+                  style: GoogleFonts.poppins(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
+                ),
+                Image.asset(
+                  'assets/images/image_2.png',
+                  height: 150,
                 ),
                 SingleChildScrollView(
                   child: Form(
@@ -120,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         ButtonWidget(
                           onPress: _submitForm,
-                          text: 'Create Account',
+                          text: 'Sign Up',
                         ),
                       ],
                     ),
@@ -146,6 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (errorMessage == null) {
         log('Registration successful');
+        showSuccess(context, 'Registration Succesfully');
 
         if (!mounted) return;
         // Dismiss waiting dialog

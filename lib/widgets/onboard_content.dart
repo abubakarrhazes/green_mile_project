@@ -10,7 +10,7 @@ class OnboardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(
+        Image.asset(
           image,
           height: 200,
         ),

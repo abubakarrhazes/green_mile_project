@@ -12,6 +12,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.deepPurpleAccent,
         body: Text('Home Page'),
       ),
     );

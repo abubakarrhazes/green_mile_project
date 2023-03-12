@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:green_mile/screens/home_page.dart';
 import 'package:green_mile/screens/login_screens/forgot_password.dart';
 import 'package:green_mile/screens/login_screens/forgot_password_sent.dart';
 import 'package:green_mile/screens/login_screens/login_page.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/forgot': (context) => const ForgotPassword(),
         '/forgotSent': (context) => const ForgotPasswordSent(),
+        '/home': (context) => HomePage(),
       },
     );
   }
