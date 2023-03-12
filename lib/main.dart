@@ -15,7 +15,7 @@ import 'screens/home_page.dart';
 
 bool shouldUseFirebaseEmulator = false;
 int? isViewed;
-bool onDevMode = true;
+bool alwaysStartAfresh = true;
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -27,6 +27,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if (alwaysStartAfresh) {
+    FirebaseAuth.instance.setPersistence(Persistence.NONE);
+  }
 
   if (shouldUseFirebaseEmulator) {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      initialRoute: onDevMode
+      initialRoute: alwaysStartAfresh
           ? '/'
           : isViewed != 0
               ? '/'
@@ -55,7 +59,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Onboard(),
         '/register': (context) => RegisterPage(),
-        '/login': (context) => LoginPage(),
+        '/login': (context) => const LoginPage(),
         '/forgot': (context) => const ForgotPassword(),
         '/forgotSent': (context) => const ForgotPasswordSent(),
         '/home': (context) => const HomePage(),
