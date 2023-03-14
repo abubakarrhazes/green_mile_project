@@ -5,7 +5,6 @@ import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/validators.dart';
 import 'package:green_mile/widgets/button_widget.dart';
 
-import '../../widgets/text_input_field.dart';
 import '../../widgets/wait_dialog.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -113,7 +112,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            content: Text(errorMessage!),
+            content: Text(errorMessage),
             actions: [
               TextButton(
                   onPressed: () => Navigator.pop(context),
