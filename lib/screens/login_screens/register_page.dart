@@ -9,6 +9,22 @@ import '../../widgets/feedback.dart';
 import '../../widgets/text_input_field.dart';
 import '../../widgets/wait_dialog.dart';
 
+const MaterialColor black = MaterialColor(
+  0xFF000000,
+  <int, Color>{
+    50: Color(0xFFEEEEEE),
+    100: Color(0xFFBBBBBB),
+    200: Color(0xFF999999),
+    300: Color(0xFF555555),
+    400: Color(0xFF333333),
+    500: Color(0xFF000000),
+    600: Color(0xFF000000),
+    700: Color(0xFF000000),
+    800: Color(0xFF000000),
+    900: Color(0xFF000000),
+  },
+);
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -49,62 +65,69 @@ class _RegisterPageState extends State<RegisterPage> {
             margin: const EdgeInsets.only(left: 22, right: 22),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  const Text(
-                    'Create Account',
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.black54),
-                  ),
-                  const SizedBox(height: 18),
-                  Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          MyInputField(
-                            hintText: 'Name',
-                            keyboardType: TextInputType.name,
-                            validator: (p0) => Validators.validateName(p0),
-                            onSaved: (p0) => formResult['name'] = p0,
-                          ),
-                          const SizedBox(height: 15),
-                          MyInputField(
-                            hintText: 'Email',
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (p0) => Validators.validateEmail(p0),
-                            onSaved: (p0) => formResult['email'] = p0,
-                          ),
-                          const SizedBox(height: 15),
-                          MyInputField(
-                            hintText: 'Password',
-                            isPassword: true,
-                            keyboardType: TextInputType.visiblePassword,
-                            controller: passwordController,
-                            validator: (p0) => Validators.validatePassword(p0),
-                            onSaved: (p0) => formResult['password'] = p0,
-                          ),
-                          const SizedBox(height: 15),
-                          MyInputField(
-                            hintText: 'Retype password',
-                            isPassword: true,
-                            validator: (p0) => Validators.validatePassword(
-                                p0, passwordController.text),
-                          ),
-                          const SizedBox(height: 20),
-                          CupertinoButton(
-                              color: Colors.black,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 22),
-                              borderRadius: BorderRadius.circular(24),
-                              onPressed: _submitForm,
-                              child: const Text('REGISTER'))
-                        ],
-                      ))
-                ],
+            child: Theme(
+              data: ThemeData(primarySwatch: black),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Create Account',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black54),
+                    ),
+                    const SizedBox(height: 18),
+                    Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            MyInputField(
+                              hintText: 'Name',
+                              keyboardType: TextInputType.name,
+                              validator: (p0) => Validators.validateName(p0),
+                              onSaved: (p0) => formResult['name'] = p0,
+                            ),
+                            const SizedBox(height: 15),
+                            MyInputField(
+                              hintText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (p0) => Validators.validateEmail(p0),
+                              onSaved: (p0) => formResult['email'] = p0,
+                            ),
+                            const SizedBox(height: 15),
+                            MyInputField(
+                              hintText: 'Password',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: passwordController,
+                              validator: (p0) =>
+                                  Validators.validatePassword(p0),
+                              onSaved: (p0) => formResult['password'] = p0,
+                            ),
+                            const SizedBox(height: 15),
+                            MyInputField(
+                              hintText: 'Retype password',
+                              isPassword: true,
+                              validator: (p0) => Validators.validatePassword(
+                                  p0, passwordController.text),
+                            ),
+                            const SizedBox(height: 20),
+                            CupertinoButton.filled(
+                                // color: Colors.black,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 22),
+                                borderRadius: BorderRadius.circular(24),
+                                onPressed: _submitForm,
+                                child: const Text(
+                                  'Register',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ))
+                          ],
+                        ))
+                  ],
+                ),
               ),
             ),
           ),
@@ -117,7 +140,9 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const Text('Already have an account? '),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'Login',
                     style: TextStyle(color: Theme.of(context).primaryColor),
@@ -165,4 +190,14 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     }
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    theme: ThemeData(
+      primarySwatch: Colors.indigo,
+      // cardTheme: CardTheme(color: Colors.black)
+    ),
+    home: RegisterPage(),
+  ));
 }

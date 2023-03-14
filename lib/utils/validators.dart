@@ -30,7 +30,7 @@ class Validators {
     } else if (compare != null && password != compare) {
       return 'Password mismatch';
     } else if (password.length < 6) {
-      return 'Enter a password of length more than 5';
+      return 'Password too short';
     }
     return null;
   }

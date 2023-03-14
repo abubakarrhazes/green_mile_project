@@ -27,10 +27,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (alwaysStartAfresh) {
-    FirebaseAuth.instance.setPersistence(Persistence.NONE);
-  }
-
   if (shouldUseFirebaseEmulator) {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   }
