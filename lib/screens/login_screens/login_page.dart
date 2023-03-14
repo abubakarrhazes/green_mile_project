@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                                 indent: 12, endIndent: 18, thickness: 1.5))
                       ],
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 18),
                     Form(
                         key: formKey,
                         child: Column(
@@ -175,19 +175,30 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding:
                 const EdgeInsets.only(top: 24, bottom: 16, left: 8, right: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
               children: [
-                const Text('Don\'t have an account? '),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/register');
-                  },
-                  child: Text(
-                    'Create one',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                )
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/forgot');
+                    },
+                    child: const Text('Reset Password')),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Don\'t have an account? '),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: Text(
+                        'Create one',
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           )
@@ -211,7 +222,14 @@ class _LoginPageState extends State<LoginPage> {
       errorMessage = await AuthProvider.loginUser(
           formResult['email']!, formResult['password']!);
     } else {
-      errorMessage = await method!();
+      try {
+        errorMessage = await method!();
+      } catch (e) {
+        if (!mounted) return;
+        // Dismiss waiting dialog
+        if (waiting) Navigator.pop(context);
+        return;
+      }
     }
     if (!mounted) return;
     // Dismiss waiting dialog
