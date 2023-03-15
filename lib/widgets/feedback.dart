@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void showSuccess(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -25,20 +24,18 @@ void showSuccess(BuildContext context, String message) {
                       Text(
                         message,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15)),
+                        style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
                       ),
-                      Text(
+                      const Text(
                         'Registration Completed Proceed to Login',
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.poppins(
-                            textStyle: const TextStyle(
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15)),
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15),
                       ),
                     ],
                   ),

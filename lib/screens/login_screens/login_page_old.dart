@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/validators.dart';
 import 'package:green_mile/widgets/optional_login.dart';
@@ -60,15 +59,13 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                const Text(
                   'Welcome Back !',
-                  style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 2),
-                  ),
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 2),
                 ),
                 const SizedBox(
                   height: 20,
