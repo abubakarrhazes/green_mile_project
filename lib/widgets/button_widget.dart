@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
-  final Function() route;
-  ButtonWidget({required this.text, required this.route});
+  final Function() onPress;
+  ButtonWidget({required this.text, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: route,
+      onTap: onPress,
       child: Container(
         height: 50,
         width: double.infinity,
@@ -19,11 +20,13 @@ class ButtonWidget extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2),
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2),
+            ),
           ),
         ),
       ),
