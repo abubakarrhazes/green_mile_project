@@ -169,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
         log('Registration successful');
 
         if (!mounted) return;
-        showSuccess(context, 'Registration Succesful');
+        showSuccess(context, 'Registration Successful');
         // Dismiss waiting dialog
         if (waiting) Navigator.of(context).pop();
         Navigator.pushReplacementNamed(context, '/login');

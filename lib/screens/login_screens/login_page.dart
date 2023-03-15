@@ -79,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.black54),
                     ),
                     const SizedBox(height: 8),
-                    Row(
-                      children: const [
+                    const Row(
+                      children: [
                         Expanded(
                             child: Divider(
                                 indent: 18, endIndent: 12, thickness: 1.5)),
@@ -118,8 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    Row(
-                      children: const [
+                    const Row(
+                      children: [
                         Expanded(
                             child: Divider(
                                 indent: 18, endIndent: 12, thickness: 1.5)),

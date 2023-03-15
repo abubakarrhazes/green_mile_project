@@ -3,6 +3,7 @@ import 'package:green_mile/screens/login_screens/forgot_password.dart';
 import 'package:green_mile/screens/login_screens/login_page.dart';
 import 'package:green_mile/screens/login_screens/register_page.dart';
 import 'package:green_mile/screens/onboard_screen/onboard.dart';
+import 'package:green_mile/screens/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,9 +24,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const Onboard(),
-        '/register': (context) => RegisterPage(),
-        '/login': (context) => LoginPage(),
+        '/register': (context) => const RegisterPage(),
+        '/login': (context) => const LoginPage(),
         '/forgot': (context) => const ForgotPassword(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
