@@ -4,6 +4,8 @@ class ProfilePhoto extends StatelessWidget {
   final String? name;
   final String? photoUrl;
   final double? radius;
+
+  /// The text backgroundColor. photo backgroundColor is lightgrey
   final Color? backgroundColor;
   final Color? foregroundColor;
   final TextStyle? textStyle;
@@ -23,7 +25,7 @@ class ProfilePhoto extends StatelessWidget {
       onTap: onTap,
       child: CircleAvatar(
         radius: radius,
-        backgroundColor: backgroundColor,
+        backgroundColor: photoUrl == null ? backgroundColor : Color(0xFFC8C8C8),
         foregroundColor: foregroundColor,
         backgroundImage: photoUrl != null ? NetworkImage(photoUrl!) : null,
         child: photoUrl == null

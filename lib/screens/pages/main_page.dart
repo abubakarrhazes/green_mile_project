@@ -1,9 +1,6 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/widgets/action_button.dart';
-import 'package:green_mile/widgets/avatar.dart';
 import 'package:green_mile/widgets/custom_delegate.dart';
 import 'package:green_mile/widgets/profile_photo.dart';
 
@@ -37,9 +34,22 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     'Emergency call',
   ];
 
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TabController _tabController = TabController(length: 3, vsync: this);
     return Scaffold(
         body: SafeArea(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
@@ -53,10 +63,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ProfilePhoto(currentUser.displayName, currentUser.photoURL,
                   radius: 25),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
                   'Hi, ${currentUser.displayName!}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 10,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
@@ -258,7 +268,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              Text('Donations')
+              const Text('Donations')
             ])),
         const SizedBox(height: 20), //20
         Container(
@@ -336,13 +346,13 @@ class _CirclePainter extends BoxPainter {
   final double radius;
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint _paint = Paint();
-    _paint.color = color;
-    _paint.isAntiAlias = true;
+    Paint paint = Paint();
+    paint.color = color;
+    paint.isAntiAlias = true;
     final Offset circleOffset = Offset(
         configuration.size!.width / 2 - radius / 2,
         configuration.size!.height - radius);
 
-    canvas.drawCircle(offset + circleOffset, radius, _paint);
+    canvas.drawCircle(offset + circleOffset, radius, paint);
   }
 }

@@ -225,6 +225,7 @@ class _LoginPageState extends State<LoginPage> {
       try {
         errorMessage = await method!();
       } catch (e) {
+        log('login error', name: 'loginWith', error: e);
         if (!mounted) return;
         // Dismiss waiting dialog
         if (waiting) Navigator.pop(context);
