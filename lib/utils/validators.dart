@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/material.dart';
-
 class Validators {
   static String? validateName(String? name) {
     if (name == null || name.isEmpty) {

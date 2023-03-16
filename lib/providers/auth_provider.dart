@@ -9,7 +9,7 @@ class AuthProvider {
 
   AuthProvider._();
 
-  static User? getUser() {
+  static User? getCurrentUser() {
     return _auth.currentUser;
   }
 
