@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:green_mile/screens/login_screens/forgot_password.dart';
 import 'package:green_mile/screens/login_screens/login_page.dart';
@@ -5,7 +6,14 @@ import 'package:green_mile/screens/login_screens/register_page.dart';
 import 'package:green_mile/screens/onboard_screen/onboard.dart';
 import 'package:green_mile/screens/pages/home_page.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 

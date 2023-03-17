@@ -79,8 +79,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.black54),
                     ),
                     const SizedBox(height: 8),
-                    const Row(
-                      children: [
+                    Row(
+                      children: const [
                         Expanded(
                             child: Divider(
                                 indent: 18, endIndent: 12, thickness: 1.5)),
@@ -118,8 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Row(
-                      children: [
+                    Row(
+                      children: const [
                         Expanded(
                             child: Divider(
                                 indent: 18, endIndent: 12, thickness: 1.5)),
@@ -225,6 +225,7 @@ class _LoginPageState extends State<LoginPage> {
       try {
         errorMessage = await method!();
       } catch (e) {
+        log('login error', name: 'loginWith', error: e);
         if (!mounted) return;
         // Dismiss waiting dialog
         if (waiting) Navigator.pop(context);

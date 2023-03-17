@@ -13,62 +13,67 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ValueNotifier<int> pageIndex = ValueNotifier(0);
-  late List<Widget> pages;
+  late List<BottomAppBarNavigationItem> _bottomBarItems;
+  int currentIndex = 0;
 
   @override
   void initState() {
-    pages = <Widget>[
-      const MainPage(),
-      const ChatPage(),
-      const HistoryPage(),
-      const ProfilePage(),
+    _bottomBarItems = [
+      BottomAppBarNavigationItem('Home', Icons.apps, const MainPage()),
+      BottomAppBarNavigationItem('Chat Room', Icons.chat, const ChatPage()),
+      BottomAppBarNavigationItem(
+          'History', Icons.history_outlined, const HistoryPage()),
+      BottomAppBarNavigationItem('Profile', Icons.person, const ProfilePage()),
     ];
     super.initState();
-  }
-
-  int currentIndex = 0;
-  void onTap(int index) {
-    setState(() {
-      currentIndex = index;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                  'https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80')),
+      body: SafeArea(
+        child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1601662528567-526cd06f6582?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=415&q=80')),
+          ),
+          child: _bottomBarItems[currentIndex].body,
         ),
-        child: pages[currentIndex],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
-          onTap: onTap,
-          currentIndex: currentIndex,
-          selectedItemColor: Colors.deepPurpleAccent,
-          unselectedItemColor: Colors.grey.withOpacity(0.5),
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          elevation: 0,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.apps), tooltip: 'Home', label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.chat), tooltip: 'Chatroom', label: 'Chatroom'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.history_outlined),
-                tooltip: 'History',
-                label: 'History'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), tooltip: 'Profile', label: 'Profile')
-          ]),
+      bottomNavigationBar: BottomAppBar(
+          child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(42)),
+            boxShadow: [BoxShadow(offset: Offset(0, -2))]),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(_bottomBarItems.length, (index) {
+              return IconButton(
+                  onPressed: () {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                  color: currentIndex == index ? Colors.black : Colors.grey,
+                  iconSize: currentIndex == index ? 32 : null,
+                  icon: Icon(_bottomBarItems[index].iconData),
+                  tooltip: _bottomBarItems[index].label);
+            })),
+      )),
     );
   }
+}
+
+class BottomAppBarNavigationItem {
+  final String label;
+  final IconData iconData;
+  final Widget body;
+
+  BottomAppBarNavigationItem(this.label, this.iconData, this.body);
 }
