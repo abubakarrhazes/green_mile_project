@@ -11,7 +11,7 @@ class ProfilePhoto extends StatelessWidget {
   final TextStyle? textStyle;
   final void Function()? onTap;
 
-  const ProfilePhoto(this.name, this.photoUrl,
+  ProfilePhoto(this.name, this.photoUrl,
       {super.key,
       this.radius,
       this.backgroundColor,
@@ -25,7 +25,8 @@ class ProfilePhoto extends StatelessWidget {
       onTap: onTap,
       child: CircleAvatar(
         radius: radius,
-        backgroundColor: photoUrl == null ? backgroundColor : Color(0xFFC8C8C8),
+        backgroundColor:
+            photoUrl == null ? backgroundColor : Colors.deepPurpleAccent,
         foregroundColor: foregroundColor,
         backgroundImage: photoUrl != null ? NetworkImage(photoUrl!) : null,
         child: photoUrl == null

@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
       BottomAppBarNavigationItem('Chat Room', Icons.chat, const ChatPage()),
       BottomAppBarNavigationItem(
           'History', Icons.history_outlined, const HistoryPage()),
-      BottomAppBarNavigationItem('Profile', Icons.person, const ProfilePage()),
+      BottomAppBarNavigationItem('Profile', Icons.person, ProfilePage()),
     ];
     super.initState();
   }
@@ -47,10 +47,6 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomAppBar(
           child: Container(
         padding: const EdgeInsets.all(4),
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(42)),
-            boxShadow: [BoxShadow(offset: Offset(0, -2))]),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(_bottomBarItems.length, (index) {
@@ -60,7 +56,9 @@ class _HomePageState extends State<HomePage> {
                       currentIndex = index;
                     });
                   },
-                  color: currentIndex == index ? Colors.black : Colors.grey,
+                  color: currentIndex == index
+                      ? Colors.deepPurpleAccent
+                      : Colors.grey,
                   iconSize: currentIndex == index ? 32 : null,
                   icon: Icon(_bottomBarItems[index].iconData),
                   tooltip: _bottomBarItems[index].label);

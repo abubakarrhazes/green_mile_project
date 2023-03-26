@@ -92,15 +92,17 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             child: Text(
               'Find Help!',
               style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  foreground: Paint()
-                    ..shader = const LinearGradient(colors: <Color>[
-                      Color.fromARGB(255, 41, 167, 226),
-                      Colors.deepPurpleAccent,
-                      Colors.indigo,
-                    ]).createShader(
-                        const Rect.fromLTWH(0.0, 0.0, 200.0, 100.0))),
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                foreground: Paint()
+                  ..shader = const LinearGradient(colors: <Color>[
+                    Color.fromARGB(255, 41, 167, 226),
+                    Colors.deepPurpleAccent,
+                    Colors.indigo,
+                  ]).createShader(
+                    const Rect.fromLTWH(0.0, 0.0, 200.0, 100.0),
+                  ),
+              ),
             )),
         const SizedBox(height: 15), //30
         Container(
@@ -166,27 +168,27 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ),
               SingleChildScrollView(
                 child: Container(
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      const Text('Lawyers Avaliable',
+                      Text('Lawyers Avaliable',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,
                               fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 20), //40
+                      SizedBox(height: 20), //40
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 20),
+                        padding: EdgeInsets.only(left: 10, right: 20),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              const Image(
+                              Image(
                                   image: AssetImage('assets/images/law.png'),
                                   height: 80,
                                   width: 80),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: const <Widget>[
+                                children: <Widget>[
                                   Text('Barrister Esther jones',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -204,19 +206,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               )
                             ]),
                       ),
-                      const SizedBox(height: 20), //40
+                      SizedBox(height: 20), //40
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 20),
+                        padding: EdgeInsets.only(left: 10, right: 20),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              const Image(
+                              Image(
                                   image: AssetImage('assets/images/law1.png'),
                                   height: 80,
                                   width: 80),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: const <Widget>[
+                                children: <Widget>[
                                   Text('Barrister Janet jacob',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -234,19 +236,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                               )
                             ]),
                       ),
-                      const SizedBox(height: 20), //40
+                      SizedBox(height: 20), //40
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 20),
+                        padding: EdgeInsets.only(left: 10, right: 20),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              const Image(
+                              Image(
                                   image: AssetImage('assets/images/law 2.png'),
                                   height: 80,
                                   width: 80),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: const <Widget>[
+                                children: <Widget>[
                                   Text('Barrister malcom omon',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -292,25 +294,28 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 4,
+            itemCount: imgs.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                margin: const EdgeInsets.only(right: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          image: DecorationImage(
-                              image: NetworkImage(imgs[
-                                  index]), //AssetImage('assets/images/'+images.keys.elementAt()),
-                              fit: BoxFit.cover)),
-                    )
-                  ],
+              return GestureDetector(
+                onTap: () {},
+                child: Container(
+                  margin: const EdgeInsets.only(right: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white,
+                            image: DecorationImage(
+                                image: NetworkImage(imgs[
+                                    index]), //AssetImage('assets/images/'+images.keys.elementAt()),
+                                fit: BoxFit.cover)),
+                      )
+                    ],
+                  ),
                 ),
               );
             },
