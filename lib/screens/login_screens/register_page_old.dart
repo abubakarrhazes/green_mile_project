@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:green_mile/providers/auth_provider.dart';
 import 'package:green_mile/utils/network_controller.dart';
 import 'package:green_mile/widgets/feedback.dart';
@@ -30,9 +29,9 @@ class _RegisterPageState extends State<RegisterPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Create Account',
-                  style: GoogleFonts.poppins(
+                  style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w600,
                   ),

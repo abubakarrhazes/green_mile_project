@@ -1,19 +1,54 @@
-import 'package:flutter/material.dart';
-import 'package:green_mile/utils/network_controller.dart';
+import 'dart:developer';
 
-import '../../utils/validators.dart';
-import '../../widgets/button_widget.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:green_mile/utils/validators.dart';
+
+import '../../providers/auth_provider.dart';
+import '../../widgets/feedback.dart';
+import '../../widgets/text_input_field.dart';
+import '../../widgets/wait_dialog.dart';
+
+const MaterialColor black = MaterialColor(
+  0xFF000000,
+  <int, Color>{
+    50: Color(0xFFEEEEEE),
+    100: Color(0xFFBBBBBB),
+    200: Color(0xFF999999),
+    300: Color(0xFF555555),
+    400: Color(0xFF333333),
+    500: Color(0xFF000000),
+    600: Color(0xFF000000),
+    700: Color(0xFF000000),
+    800: Color(0xFF000000),
+    900: Color(0xFF000000),
+  },
+);
 
 class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  final controller = NetworkController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  late TextEditingController passwordController;
+  final formKey = GlobalKey<FormState>();
+  final formResult = {};
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,8 +112,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter Your Password Here',
-                          prefix: const Icon(Icons.lock_outline),
-                          suffix: const Icon(Icons.visibility),
+                          prefix: Icon(Icons.lock_outline),
+                          suffix: Icon(Icons.visibility),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:
@@ -112,12 +147,57 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ],
                   ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+                )
+              ],
+            ),
+          )
+        ],
+      )),
     );
   }
+
+  void _submitForm() async {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      bool waiting = true;
+      showWaitDialog(context).then((value) => waiting = true);
+      String? errorMessage = await AuthProvider.registerUser(
+          formResult['name']!, formResult['email']!, formResult['password']!);
+
+      if (errorMessage == null) {
+        log('Registration successful');
+
+        if (!mounted) return;
+        showSuccess(context, 'Registration Successful');
+        // Dismiss waiting dialog
+        if (waiting) Navigator.of(context).pop();
+        Navigator.pushReplacementNamed(context, '/login');
+      } else {
+        if (!mounted) return;
+        if (waiting) Navigator.of(context).pop();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: Text(errorMessage),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Okay'))
+            ],
+          ),
+        );
+      }
+    }
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    theme: ThemeData(
+      primarySwatch: Colors.indigo,
+      // cardTheme: CardTheme(color: Colors.black)
+    ),
+    home: RegisterPage(),
+  ));
 }
