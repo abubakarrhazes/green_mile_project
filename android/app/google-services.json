@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1029253004219",
+    "project_id": "green-mile-24fb2",
+    "storage_bucket": "green-mile-24fb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029253004219:android:332c69d99d24fe1791629e",
+        "android_client_info": {
+          "package_name": "com.example.green_mile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029253004219-h9e2hg2u1d8a6kgdvpe3nhamt1i03jmn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUZmb9dGbpKVXu8ki0_HQuMba0hDrYlDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029253004219-ac9p31qbf00r0c5odclmqmn0caragscv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1029253004219-sis1rs69n4menjismpugecfqbncmj7eh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.greenMile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
