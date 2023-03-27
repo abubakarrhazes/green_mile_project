@@ -51,101 +51,101 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Create An Account',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-              Image.network(
-                  'https://cdn-icons-png.flaticon.com/512/7458/7458316.png',
-                  height: 150),
-              const SizedBox(
-                height: 20,
+    return Scaffold(
+      backgroundColor: const Color(0xFFF3F3F3),
+      body: SafeArea(
+          child: ListView(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 3,
+            height: MediaQuery.of(context).size.height / 4,
+            child: Image.asset('assets/images/image_2.png'),
+          ),
+          Card(
+            margin: const EdgeInsets.only(left: 22, right: 22),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            child: Theme(
+              data: ThemeData(primarySwatch: black),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Create Account',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black54),
+                    ),
+                    const SizedBox(height: 18),
+                    Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            MyInputField(
+                              hintText: 'Name',
+                              keyboardType: TextInputType.name,
+                              validator: (p0) => Validators.validateName(p0),
+                              onSaved: (p0) => formResult['name'] = p0,
+                            ),
+                            const SizedBox(height: 15),
+                            MyInputField(
+                              hintText: 'Email',
+                              keyboardType: TextInputType.emailAddress,
+                              validator: (p0) => Validators.validateEmail(p0),
+                              onSaved: (p0) => formResult['email'] = p0,
+                            ),
+                            const SizedBox(height: 15),
+                            MyInputField(
+                              hintText: 'Password',
+                              isPassword: true,
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: passwordController,
+                              validator: (p0) =>
+                                  Validators.validatePassword(p0),
+                              onSaved: (p0) => formResult['password'] = p0,
+                            ),
+                            const SizedBox(height: 15),
+                            MyInputField(
+                              hintText: 'Retype password',
+                              isPassword: true,
+                              validator: (p0) => Validators.validatePassword(
+                                  p0, passwordController.text),
+                            ),
+                            const SizedBox(height: 20),
+                            CupertinoButton.filled(
+                                // color: Colors.black,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 22),
+                                borderRadius: BorderRadius.circular(24),
+                                onPressed: _submitForm,
+                                child: const Text(
+                                  'Register',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ))
+                          ],
+                        ))
+                  ],
+                ),
               ),
-              Form(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        controller: emailController,
-                        validator: (value) =>
-                            Validators.validateEmail("$emailController"),
-                        decoration: InputDecoration(
-                          labelText: 'Name',
-                          hintText: 'Enter Your Name Here',
-                          suffix: const Icon(Icons.person_2_outlined),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                        controller: passwordController,
-                        validator: (value) =>
-                            Validators.validatePassword("$passwordController"),
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'Enter Your Email',
-                          suffix: const Icon(Icons.mail_outline),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: passwordController,
-                        validator: (value) =>
-                            Validators.validatePassword("$passwordController"),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Enter Your Password Here',
-                          prefix: Icon(Icons.lock_outline),
-                          suffix: Icon(Icons.visibility),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: passwordController,
-                        validator: (value) =>
-                            Validators.validatePassword("$passwordController"),
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          hintText: 'Confirm  Password Here',
-                          prefix: const Icon(Icons.lock_outline),
-                          suffix: const Icon(Icons.visibility),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                                  const BorderSide(color: Colors.transparent)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      ButtonWidget(
-                        route: () {},
-                        text: 'Create Account',
-                      ),
-                    ],
+            ),
+          ),
+          const Spacer(),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 24, bottom: 16, left: 8, right: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Already have an account? '),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Login',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                 )
               ],
