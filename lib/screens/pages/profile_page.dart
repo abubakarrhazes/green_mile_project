@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   ColorTile(
                     text: 'Personal Data',
-                    icon: Icons.person_2_outlined,
+                    icon: Icons.person,
                     color: Colors.deepPurple,
                     iconColor: Colors.deepPurple,
                     tap: () {},
