@@ -168,7 +168,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
               ),
               SingleChildScrollView(
                 child: Container(
-                  child: const Column(
+                  child:  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text('Lawyers Avaliable',
