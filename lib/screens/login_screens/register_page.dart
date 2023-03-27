@@ -77,8 +77,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter Your Password Here',
-                          prefix: Icon(Icons.lock_outline),
-                          suffix: Icon(Icons.visibility),
+                          prefix: const Icon(Icons.lock_outline),
+                          suffix: const Icon(Icons.visibility),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide:

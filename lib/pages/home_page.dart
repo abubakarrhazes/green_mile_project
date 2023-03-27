@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_mile/pages/chat_page.dart';
-import 'package:green_mile/pages/history_page.dart';
+import 'package:green_mile/pages/location_page.dart';
 import 'package:green_mile/pages/main_page.dart';
 import 'package:green_mile/pages/profile_page.dart';
 
@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePageState extends State<HomePage> {
-  final ValueNotifier<int> pageIndex = ValueNotifier(0);
   late List<Widget> pages;
 
   @override
@@ -23,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     pages = <Widget>[
      const MainPage(),
      const ChatPage(),
-      const HistoryPage(),
+      const LocationPage(),
       const ProfilePage(),
     ];
     super.initState();
@@ -73,9 +72,9 @@ class _HomePageState extends State<HomePage> {
 
               ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history_outlined),
-               tooltip: 'History',
-               label: 'History'
+              icon: Icon(Icons.location_on),
+               tooltip: 'Location',
+               label: 'Location'
               ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
