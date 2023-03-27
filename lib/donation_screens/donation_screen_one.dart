@@ -127,26 +127,31 @@ class _DonationScreenOneState extends State<DonationScreenOne> {
                ),
                const SizedBox(height:40),
                  //  backgroundColor: Color.fromARGB(255, 255, 213, 0),
-             Container(
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            color:const Color.fromARGB(255, 255, 213, 0),
-            borderRadius:BorderRadius.circular(30)   
-         ),
-        child: const Padding(
-          padding: EdgeInsets.all(10),
-        child: Center(
-          child: Text('Support Now',
-              style:  TextStyle(
-           color:Color.fromARGB(255, 13, 2, 54),
-           fontSize: 20,
-           fontWeight: FontWeight.bold
-              ) 
-              ),
-        ),
+             InkWell(
+              onTap: (){
+                   Navigator.pushNamed(context, '/cardform');
+              },
+               child: Container(
+                       width: double.infinity,
+                       height: 50,
+                       decoration: BoxDecoration(
+                         color:const Color.fromARGB(255, 255, 213, 0),
+                         borderRadius:BorderRadius.circular(30)   
                       ),
-                  ),
+                     child: const Padding(
+                       padding: EdgeInsets.all(10),
+                     child: Center(
+                       child: Text('Support Now',
+                style:  TextStyle(
+                        color:Color.fromARGB(255, 13, 2, 54),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                ) 
+                ),
+                     ),
+                        ),
+                    ),
+             ),
                    const SizedBox(height:20),  
             ]
           )
