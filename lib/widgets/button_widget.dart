@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String text;
@@ -19,11 +20,13 @@ class ButtonWidget extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2),
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2),
+            ),
           ),
         ),
       ),

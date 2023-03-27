@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:green_mile/utils/validators.dart';
 
 import '../../providers/auth_provider.dart';
+import '../../widgets/feedback.dart';
 import '../../widgets/text_input_field.dart';
 import '../../widgets/wait_dialog.dart';
 
@@ -117,8 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                     Row(
-                      children: [
+                    Row(
+                      children: const [
                         Expanded(
                             child: Divider(
                                 indent: 18, endIndent: 12, thickness: 1.5)),
@@ -224,7 +225,6 @@ class _LoginPageState extends State<LoginPage> {
       try {
         errorMessage = await method!();
       } catch (e) {
-        log('login error', name: 'loginWith', error: e);
         if (!mounted) return;
         // Dismiss waiting dialog
         if (waiting) Navigator.pop(context);

@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+
 class Validators {
   static String? validateName(String? name) {
     if (name == null || name.isEmpty) {
@@ -10,7 +14,7 @@ class Validators {
 
   static String? validateEmail(String? email) {
     RegExp emailRegExp = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
 
     if (email == null || email.isEmpty) {
       return 'Email can\'t be empty';
