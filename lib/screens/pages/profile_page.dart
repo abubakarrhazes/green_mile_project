@@ -12,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final currentUser = AuthProvider.getCurrentUser()!;
+  final currentUser = AuthProvider.getUser()!;
 
   @override
   Widget build(BuildContext context) {

@@ -107,8 +107,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 25,
                       ),
                       ButtonWidget(
-                        route: () {},
                         text: 'Create Account',
+                        onPress: () {},
                       ),
                     ],
                   ),

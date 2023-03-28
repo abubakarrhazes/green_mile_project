@@ -5,7 +5,7 @@ import '../providers/auth_provider.dart';
 
 class UserTile extends StatelessWidget {
   UserTile({Key? key}) : super(key: key);
-  final currentUser = AuthProvider.getCurrentUser()!;
+  final currentUser = AuthProvider.getUser()!;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +45,3 @@ class UserTile extends StatelessWidget {
     );
   }
 }
-
-
-

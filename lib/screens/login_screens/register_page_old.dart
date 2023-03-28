@@ -19,7 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final Map<String, String?> formResult = {};
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final controller = NetworkController();
-  // final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
