@@ -130,11 +130,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {
-                      if(index == pickedIndex){
+                      if (index == pickedIndex) {
                         Navigator.pushNamed(context, '/emergency');
-
-                      }
-                      else{
+                      } else {
                         Navigator.pushNamed(context, '/expert');
                       }
                     },
@@ -185,18 +183,18 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         onTap: () {
                           Navigator.pushNamed(context, '/lawyer_1');
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 20),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Image(
+                                const Image(
                                     image: AssetImage('assets/images/law.png'),
                                     height: 80,
                                     width: 80),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
+                                  children: const <Widget>[
                                     Text('Barrister Esther jones',
                                         style: TextStyle(
                                             color: Colors.black,
@@ -221,18 +219,18 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         onTap: () {
                           Navigator.pushNamed(context, '/lawyer_2');
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 20),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Image(
+                                const Image(
                                     image: AssetImage('assets/images/law1.png'),
                                     height: 80,
                                     width: 80),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
+                                  children: const <Widget>[
                                     Text('Barrister Janet jacob',
                                         style: TextStyle(
                                             color: Colors.black,
@@ -257,19 +255,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                         onTap: () {
                           Navigator.pushNamed(context, '/lawyer_2');
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.only(left: 10, right: 20),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 20),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Image(
+                                const Image(
                                     image:
                                         AssetImage('assets/images/law 2.png'),
                                     height: 80,
                                     width: 80),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
+                                  children: const <Widget>[
                                     Text('Barrister malcom Omon',
                                         style: TextStyle(
                                             color: Colors.black,

@@ -18,14 +18,14 @@ class EmergencyScreen extends StatelessWidget {
             top: 50,
             left: 20,
           ),
-          child: const Row(children: <Widget>[
-            Avatar.medium(
+          child: Row(children: <Widget>[
+            const Avatar.medium(
                 img: NetworkImage(
                     'https://www.shutterstock.com/image-photo/close-face-young-stylish-woman-600w-1671900778.jpg')),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     'Hello,Jennifer',
                     style: TextStyle(
@@ -44,7 +44,7 @@ class EmergencyScreen extends StatelessWidget {
               ),
             ),
             //Expanded(child: Container()),
-            Column(children: <Widget>[
+            Column(children: const <Widget>[
               Text(
                 'USA,California',
                 style: TextStyle(
@@ -63,8 +63,8 @@ class EmergencyScreen extends StatelessWidget {
                     overflow: TextOverflow.ellipsis),
               )
             ]),
-            SizedBox(width: 10),
-            Padding(
+            const SizedBox(width: 10),
+            const Padding(
               padding: EdgeInsets.only(right: 20),
               child: Icon(Icons.location_on,
                   color: Colors.deepPurpleAccent, size: 20),
