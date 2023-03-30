@@ -10,6 +10,8 @@ import 'package:green_mile/screens/lawyer_screens/lawyer_screen_three.dart';
 import 'package:green_mile/screens/lawyer_screens/lawyer_screen_two.dart';
 import 'package:green_mile/screens/login_screens/forgot_password.dart';
 import 'package:green_mile/screens/login_screens/login_page.dart';
+import 'package:green_mile/screens/login_screens/register_page.dart';
+import 'package:green_mile/screens/login_screens/register_page_old.dart';
 import 'package:green_mile/screens/onboard_screen/onboard.dart';
 import 'package:green_mile/screens/other_screens/card_form_screen.dart';
 import 'package:green_mile/screens/other_screens/donation_register_screen.dart';
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const Onboard(),
         '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
         '/forgot': (context) => const ForgotPassword(),
         '/emergency': (context) => const EmergencyScreen(),
         '/home': (context) => const HomePage(),
